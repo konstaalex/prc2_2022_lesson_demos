@@ -50,7 +50,7 @@ public class EmailValidatorTest {
         
         EmailValidator validator = new EmailValidator();
         
-        assertThat( validator.getTopLevelDomain( "R.vandenHam@fontys.com") )
+        assertThat( validator.getTopLevelDomain( "R.vandenHam@fontys.nl") )
                 .as( "Should be nl")
                 .isEqualTo( "nl");
         
