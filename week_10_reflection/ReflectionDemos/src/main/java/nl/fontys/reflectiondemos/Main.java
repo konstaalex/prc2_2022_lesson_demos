@@ -30,8 +30,8 @@ public class Main {
         
         // 3 Based on String
         System.out.println("Please enter a class name: ");
-        //Scanner scanner = new Scanner("nl.fontys.reflectiondemos.DemoClass");
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner("nl.fontys.reflectiondemos.DemoClass");
+        //Scanner scanner = new Scanner(System.in);
         
         String input = scanner.nextLine();
         Class<?> icType = Class.forName(input);
