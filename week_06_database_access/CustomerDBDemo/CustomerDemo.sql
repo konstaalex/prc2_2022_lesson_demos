@@ -38,6 +38,7 @@ insert into customers (firstname, lastname, dob) values ('Martijn', 'Bonajo', '0
 
 start transaction;
 delete from customers;
+
 delete from customers where firstname = 'Lisa';
 rollback;
 
@@ -56,3 +57,4 @@ select * from information_schema.columns where table_name = 'customers';
 
 -- Resulting query of the SQL-injection example
 SELECT * FROM CUSTOMERS WHERE firstname = '' or firstname like '%%';
+

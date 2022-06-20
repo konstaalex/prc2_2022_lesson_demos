@@ -16,20 +16,23 @@ import org.postgresql.ds.PGSimpleDataSource;
  */
 public class DBProvider {
 
-    static Map<String, DataSource> cache = new HashMap<>();
-
+    static Map<String, DataSource> cache = new HashMap<>();  // it is stored in cache 
+// create dataSource - part of JDBS
+    
+    // this return a data source and cache  the config is taken from the HashMap
+    
     static DataSource getDataSource(final String sourceName) {
 
         return cache.computeIfAbsent(sourceName,
                 (s) -> {
-                    Properties props = properties("application.properties");
-
-                    PGSimpleDataSource source = new PGSimpleDataSource();
+                    Properties props = properties("application.properties"); // want to read from a properties file which is in the root of our prj like the pom file
+// create the impl of dataSource - it can be impl cause we provided the api in the pom file
+                    PGSimpleDataSource source = new PGSimpleDataSource(); // the con. the specific impl of a data source
 
                     String prefix = sourceName + ".jdbc.";
 
                     String[] serverNames = {props.getProperty(prefix + "dbhost")};
-
+// config our data source
                     source.setServerNames(serverNames);
                     source.setUser(props.getProperty(prefix + "username"));
                     source.setDatabaseName(props.getProperty(prefix + "dbname"));
@@ -41,7 +44,7 @@ public class DBProvider {
         );
     }
 
-    static Properties properties(String propFileName) {
+    static Properties properties(String propFileName) { // reading the file
         Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream(propFileName);) {
             properties.load(fis);

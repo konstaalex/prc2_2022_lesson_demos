@@ -28,13 +28,13 @@ public class Main {
         System.out.println("\nExample 1 - Read data from database using Statement\n");
 
         try ( Connection con = db.getConnection();   // Try-with-resource: con and stm are AutoClosable 
-              Statement stm = con.createStatement();) {
+              Statement stm = con.createStatement();) { // we dont need to write finally blocks
 
             ResultSet result = stm.executeQuery("SELECT * FROM customersview");
 
             while (result.next()) {
                 int id = result.getInt(1);
-                String firstName = result.getString("firstName");
+                String firstName = result.getString("firstName"); /// is more safe if someone change the names of col
                 String lastName = result.getString("lastName");
                 LocalDate dob = result.getObject("dob", LocalDate.class);
 
@@ -52,9 +52,9 @@ public class Main {
 
         // Assume that a user can enter a firstname in the GUI
         // If the user does what we expect, then it will indeed be a regular string:
-        // String filter = "Richard";
+      //   String filter = "Richard";
         // But if the user enters:  ' or firstname like '%%    like below...
-        String filter = "' or firstname like '%%";
+     String filter = "' or firstname like '%%";
 
         // The resulting query will look like this:
         // SELECT * FROM CUSTOMERS WHERE firstname = '' or firstname like '%%'
@@ -84,12 +84,12 @@ public class Main {
         }
 
         
-        //********************************************************************************************************//
+//        //********************************************************************************************************//
         System.out.println("\nExample 3 - Improve performance and avoid SQL Injections -> Use PreparedStatement\n");
 
         
-        //filter = "Richard";
-        filter = "' or firstname like '%%";  //With a prepared statement, this injection has no chance anymore
+        filter = "Richard";
+       // filter = "' or firstname like '%%";  //With a prepared statement, this injection has no chance anymore
         query = "SELECT * FROM customersview WHERE firstname = ?";
 
         // The question mark needs to be replaced by a value of a certain type
@@ -122,7 +122,7 @@ public class Main {
 
         
         
-        //********************************************************************************//
+//        //********************************************************************************//
         System.out.println("\nExample 4 - Insert a new record using prepared statement\n");
 
         String fname = "Lisa";
